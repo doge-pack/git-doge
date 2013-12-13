@@ -1,3 +1,63 @@
-#! /bin/sh
+#! /bin/bash
 
-git log --oneline | awk '{for (i=2; i<=NF; i++) {printf "%s ", $i} print ""}' | awk 'function r(n) {return int(n * rand() + 1)} BEGIN {doge_up="Wow,Very,Much,Such,So,Many"; doge_low="wow,very,much,such,so,many"; dln=split(doge_low, dl, ","); dun=split(doge_up, du, ",");} {ln=split($0, line, " "); i=r(ln); j=r(dln); m=match(line[i], "^[A-Z]"); if (m == 0) {line[i]=dl[j]} else {line[i]=du[j]} ; for (k=0; k<=ln; k++) {printf "%s ", line[k]}; print ""}'
+column_range() {
+    declare -r from="$1"
+    declare -r to="$2"
+    awk "{for (i=${from}; i<=${to}; i++) {printf \"%s \", \$i} print \"\"}"
+}
+
+git log --oneline \
+| column_range 2 NF \
+| awk \
+'
+    function random_index_upto(n) {
+        return int(n * rand() + 1)
+    }
+
+    function is_capitalized(word) {
+        return match(word, "^[A-Z]");
+    }
+
+    function print_array(a,    i, n) {
+        n = length(a);
+        for (i = 0; i <= n; i++) {
+            if (i == n) {
+                printf "%s" , commit_words[i]
+            } else {
+                printf "%s ", commit_words[i]
+            }
+        }
+    }
+
+    function print_newline() {
+        print ""
+    }
+
+    BEGIN \
+    {
+        doge_vocabulary_upper = "Wow,Very,Much,Such,So,Many";
+        doge_vocabulary_lower = "wow,very,much,such,so,many";
+
+        num_of_doge_words = split(doge_vocabulary_lower, doge_words_lower, ",");
+        _                 = split(doge_vocabulary_upper, doge_words_upper, ",");
+    }
+
+    {
+        commit_line = $0
+        num_of_commit_words = split(commit_line, commit_words, " ");
+
+        c = random_index_upto(num_of_commit_words);
+        d = random_index_upto(num_of_doge_words);
+
+        # Non-capitalized also implies non-alpha characters, so we test for a
+        # negative rather than a positive case
+        if ( ! is_capitalized(commit_words[c])) {
+            commit_words[c] = doge_words_lower[d]
+        } else {
+            commit_words[c] = doge_words_upper[d]
+        };
+
+        print_array(commit_words);
+        print_newline()
+    }
+'
