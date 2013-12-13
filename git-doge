@@ -1,0 +1,3 @@
+#! /bin/sh
+
+git log --oneline | awk '{for (i=2; i<=NF; i++) {printf "%s ", $i} print ""}' | awk 'function r(n) {return int(n * rand() + 1)} BEGIN {doge_up="Wow,Very,Much,Such,So,Many"; doge_low="wow,very,much,such,so,many"; dln=split(doge_low, dl, ","); dun=split(doge_up, du, ",");} {ln=split($0, line, " "); i=r(ln); j=r(dln); m=match(line[i], "^[A-Z]"); if (m == 0) {line[i]=dl[j]} else {line[i]=du[j]} ; for (k=0; k<=ln; k++) {printf "%s ", line[k]}; print ""}'
