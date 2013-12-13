@@ -22,9 +22,9 @@ git log --oneline \
         n = length(a);
         for (i = 0; i <= n; i++) {
             if (i == n) {
-                printf "%s" , commit_words[i]
+                printf "%s" , a[i]
             } else {
-                printf "%s ", commit_words[i]
+                printf "%s ", a[i]
             }
         }
     }
