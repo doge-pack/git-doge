@@ -39,7 +39,7 @@ git log --oneline \
         doge_vocabulary_lower = "wow,very,much,such,so,many";
 
         num_of_doge_words = split(doge_vocabulary_lower, doge_words_lower, ",");
-        _                 = split(doge_vocabulary_upper, doge_words_upper, ",");
+                            split(doge_vocabulary_upper, doge_words_upper, ",");
     }
 
     {
