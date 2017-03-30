@@ -1,50 +1,41 @@
-#! /bin/bash
+#! /bin/sh
 
-column_range() {
-    declare -r from="$1"
-    declare -r to="$2"
-    awk "{for (i=${from}; i<=${to}; i++) {printf \"%s \", \$i} print \"\"}"
-}
-
-git log --oneline \
-| column_range 2 NF \
-| awk \
-'
+git filter-branch -f --msg-filter 'awk "
     function random_index_upto(n) {
         return int(n * rand() + 1)
     }
 
     function is_capitalized(word) {
-        return match(word, "^[A-Z]");
+        return match(word, \"^[A-Z]\");
     }
 
     function print_array(a,    i, n) {
         n = length(a);
         for (i = 0; i <= n; i++) {
             if (i == n) {
-                printf "%s" , a[i]
+                printf \"%s\" , a[i]
             } else {
-                printf "%s ", a[i]
+                printf \"%s \", a[i]
             }
         }
     }
 
     function print_newline() {
-        print ""
+        print \"\"
     }
 
     BEGIN \
     {
-        doge_vocabulary_upper = "Wow,Very,Much,Such,So,Many";
-        doge_vocabulary_lower = "wow,very,much,such,so,many";
+        doge_vocabulary_upper = \"Wow,Very,Much,Such,So,Many\";
+        doge_vocabulary_lower = \"wow,very,much,such,so,many\";
 
-        num_of_doge_words = split(doge_vocabulary_lower, doge_words_lower, ",");
-                            split(doge_vocabulary_upper, doge_words_upper, ",");
+        num_of_doge_words = split(doge_vocabulary_lower, doge_words_lower, \",\");
+                            split(doge_vocabulary_upper, doge_words_upper, \",\");
     }
 
     {
-        commit_line = $0
-        num_of_commit_words = split(commit_line, commit_words, " ");
+        commit_line = \$0
+        num_of_commit_words = split(commit_line, commit_words, \" \");
 
         c = random_index_upto(num_of_commit_words);
         d = random_index_upto(num_of_doge_words);
@@ -60,4 +51,4 @@ git log --oneline \
         print_array(commit_words);
         print_newline()
     }
-'
+"'
