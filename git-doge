@@ -35,6 +35,11 @@ git filter-branch -f --msg-filter 'awk "
 
     {
         commit_line = \$0
+
+        # We will be called anew for each commit msg, so we need a unique-ish
+        # seed. Is there a better way?
+        srand(length(commit_line));
+
         num_of_commit_words = split(commit_line, commit_words, \" \");
 
         c = random_index_upto(num_of_commit_words);
