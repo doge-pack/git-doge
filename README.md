@@ -32,7 +32,7 @@ ffdc6dc Implement the parse transform for parameterized modules
 42c1e14 Set up the project
 be436e5 Add README.md
 $
-$ ../git-doge
+$ ../git-doge/git-doge
 Rewrite 7c6fe6193b7b11c874877246bcb612414fbd1359 (9/9) (0 seconds passed, remaining 0 predicted)
 Ref 'refs/heads/master' was rewritten
 $
