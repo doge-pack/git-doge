@@ -1,6 +1,8 @@
 git-doge
 ========
 
+![Doge](https://raw.githubusercontent.com/doge-pack/git-doge/master/doge.gif)
+
 ### Demo
 
 #### Grab git-doge
