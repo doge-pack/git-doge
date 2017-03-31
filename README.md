@@ -3,6 +3,8 @@ git-doge
 
 ![Doge](https://raw.githubusercontent.com/doge-pack/git-doge/master/doge.gif)
 
+I re-write much histories. You've been warned. Such danger. Wow.
+
 ### Demo
 
 #### Grab git-doge
