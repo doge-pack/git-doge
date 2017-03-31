@@ -1,7 +1,9 @@
 git-doge
 ========
 
-Example usage:
+### Demo
+
+#### Grab git-doge
 
 ```
 $ git clone https://github.com/doge-pack/git-doge.git
@@ -12,6 +14,11 @@ remote: Total 23 (delta 10), reused 23 (delta 10), pack-reused 0
 Unpacking objects: 100% (23/23), done.
 Checking connectivity... done.
 $
+```
+
+#### Grab a repo you'd like to enhance
+
+```
 $ git clone https://github.com/erlang/pmod_transform.git
 Cloning into 'pmod_transform'...
 remote: Counting objects: 52, done.
@@ -19,8 +26,18 @@ remote: Total 52 (delta 0), reused 0 (delta 0), pack-reused 52
 Unpacking objects: 100% (52/52), done.
 Checking connectivity... done.
 $
+```
+
+#### Enter the vict... target repo
+
+```
 $ cd pmod_transform/
 $
+```
+
+#### Witness boring commit history
+
+```
 $ git log --oneline | cat
 7c6fe61 Merge pull request #3 from richcarl/handle-no-eof
 1912c79 handle generated form lists without eof marker
@@ -32,10 +49,20 @@ ffdc6dc Implement the parse transform for parameterized modules
 42c1e14 Set up the project
 be436e5 Add README.md
 $
+```
+
+#### Release the git-doge
+
+```
 $ ../git-doge/git-doge
 Rewrite 7c6fe6193b7b11c874877246bcb612414fbd1359 (9/9) (0 seconds passed, remaining 0 predicted)
 Ref 'refs/heads/master' was rewritten
 $
+```
+
+#### Behold fun commit history
+
+```
 $ git log --oneline | cat
 04e1ae9  Many pull request #3 from richcarl/handle-no-eof  many  handle generated form very without eof marker
 805b36e  handle generated form very without eof marker
